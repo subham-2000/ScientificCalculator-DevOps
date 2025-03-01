@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/subham-2000/ScientificCalculator-DevOps.git'
+                git branch: 'main', url: 'https://github.com/subham-2000/ScientificCalculator-DevOps.git'
             }
         }
 
