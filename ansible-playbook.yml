@@ -1,0 +1,12 @@
+- name: Deploy Scientific Calculator
+  hosts: localhost
+  tasks:
+    - name: Pull Docker Image
+      command: docker pull subham20000/scientific-calculator
+
+    - name: Stop existing container
+      command: docker rm -f calc-app
+      ignore_errors: yes
+
+    - name: Run Container in Interactive Mode
+      command: docker run --name calc-app --rm -it subham20000/scientific-calculator
