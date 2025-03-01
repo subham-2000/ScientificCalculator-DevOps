@@ -1,6 +1,6 @@
 # Use an OpenJDK image with Maven to build and run the app
 # FROM maven:3.8.7-openjdk-17 AS build
-FROM openjdk:17-jdkd-alpine
+FROM openjdk:17-jdk-alpine
 # Set working directory
 WORKDIR /app
 
