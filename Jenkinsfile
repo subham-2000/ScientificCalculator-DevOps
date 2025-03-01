@@ -37,7 +37,7 @@ pipeline {
                     sh 'docker tag $DOCKER_IMAGE subham20000/$DOCKER_IMAGE:latest'
                     sh 'docker push subham20000/$DOCKER_IMAGE'
                     }
-                 }
+                }
             }
         }
 
