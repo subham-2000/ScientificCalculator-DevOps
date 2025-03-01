@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'subham20000/scientific-calculator'
+        DOCKER_IMAGE = 'scientific-calculator'
     }
 
     stages {
@@ -31,9 +31,13 @@ pipeline {
         }
 
         stage('Push Docker Image') {
-            steps {
-                sh 'docker login -u subham20000'
-                sh 'docker push $DOCKER_IMAGE'
+             steps {
+                script{
+                    docker.withRegistry('', 'docker-hub-credentials') {
+                    sh 'docker tag calculator subham20000/scientific-calculator:latest'
+                    sh 'docker push subham20000/calculator'
+                    }
+                 }
             }
         }
 
