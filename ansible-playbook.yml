@@ -1,12 +1,35 @@
-- name: Deploy Scientific Calculator
+# - name: Deploy Scientific Calculator
+#   hosts: localhost
+#   tasks:
+#     - name: Pull Docker Image
+#       command: docker pull subham20000/scientific-calculator
+
+#     - name: Stop existing container
+#       command: docker rm -f calc-app
+#       ignore_errors: yes
+
+#     - name: Run Container in Interactive Mode
+#       command: docker run --name calc-app --rm -it subham20000/scientific-calculator
+
+---
+- name: Pull Docker Image from Docker Hub
   hosts: localhost
+  remote_user: subham
+  become: false
   tasks:
     - name: Pull Docker Image
-      command: docker pull subham20000/scientific-calculator
+      docker_image:
+        name: "subham20000/scientific-calculator"
+        source: pull
+      register: docker_pull_result
 
-    - name: Stop existing container
-      command: docker rm -f calc-app
-      ignore_errors: yes
-
-    - name: Run Container in Interactive Mode
-      command: docker run --name calc-app --rm -it subham20000/scientific-calculator
+    - name: Display Docker Pull Result
+      debug:
+        var: docker_pull_result
+        
+    - name: Start Docker service
+      service:
+        name: docker
+        state: started
+    - name: Running container
+      shell: docker run -it -d --name calculator subham20000/scientific-calculator /bin/bash
