@@ -4,6 +4,7 @@ public class Calculator {
 
     // Square root function
     // change 1
+    //change2
     public static double sqrt(double x) {
         if (x < 0) {
             throw new IllegalArgumentException("Cannot calculate square root of a negative number.");
